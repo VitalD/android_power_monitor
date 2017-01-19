@@ -47,11 +47,6 @@ do
 		notify-send -i "$icon_name" "$prog_name" "Battery level: $bat_level%"
 	fi
 
-	if [ $bat_level == 100 ]
-	then
-		exit 0
-	fi
-
 	sleep 1
 
     bat_level_old=$bat_level
