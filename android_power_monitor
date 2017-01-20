@@ -5,7 +5,10 @@ prog_name='Android Power Monitor'
 bat_level_old=-1;
 first=1
 
-sleep 1
+if [ "$1" == '-startup' ]
+then
+	sleep 5
+fi
 
 while true
 do
