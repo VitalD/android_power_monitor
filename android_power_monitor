@@ -41,11 +41,11 @@ do
 
 	if [ "$bat_level" -gt "$bat_level_old" ] && [ "$bat_level_avg" -eq 0 ]
 	then
-        if [ "$bat_level_avg" -lt 100 ]
+        if [ "$bat_level_index" -lt 100 ]
         then
 	        icon_name="battery-0$bat_level_index-charging"
         else
-	        icon_name="battery-$bat_level_index-charging"
+	        icon_name="battery-full-charging"
         fi
 		notify-send -i "$icon_name" "$prog_name" "Battery level: $bat_level%"
 	fi
