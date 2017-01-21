@@ -5,7 +5,7 @@ prog_name='Android Power Monitor'
 bat_level_old=-1;
 first=1
 
-if [ "$1" == '-startup' ]
+if [ "$1" = '-startup' ]
 then
 	sleep 5
 fi
@@ -16,15 +16,15 @@ do
 
 	if [ ! $conn_status = 'device' ]
 	then
-        if [ ! "$first" ]
-        then
-		    notify-send -i error "$prog_name" 'Device disconnected'
-		    first=1
-            bat_level_old=-1
-        else
-            sleep 1
-            continue
-        fi
+		if [ ! "$first" ]
+		then
+		notify-send -i error "$prog_name" 'Device disconnected'
+		first=1
+				bat_level_old=-1
+		else
+				sleep 1
+				continue
+		fi
 	fi
 
 	bat_level=`adb shell "cat /sys/class/power_supply/battery/capacity" | tr -d '\r\n'`
@@ -41,12 +41,17 @@ do
 
 	if [ "$bat_level" -gt "$bat_level_old" ] && [ "$bat_level_avg" -eq 0 ]
 	then
-        if [ "$bat_level_index" -lt 100 ]
-        then
-	        icon_name="battery-0$bat_level_index-charging"
-        else
-	        icon_name="battery-full-charging"
-        fi
+		if [ "$bat_level_index" -lt 100 ]
+		then
+			if [ "$bat_level_index" -lt 20 ]
+			then
+				icon_name="battery-000-charging"
+			else
+				icon_name="battery-0$bat_level_index-charging"
+			fi
+		else
+			icon_name="battery-full-charging"
+		fi
 		notify-send -i "$icon_name" "$prog_name" "Battery level: $bat_level%"
 	fi
 
