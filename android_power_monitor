@@ -7,14 +7,14 @@ first=1
 
 if [ "$1" = '-startup' ]
 then
-	sleep 5
+	sleep 15
 fi
 
 while true
 do
 	conn_status=`adb get-state`
 
-	if [ ! $conn_status = 'device' ]
+	if [ ! "$conn_status" = 'device' ]
 	then
 		if [ ! "$first" ]
 		then
